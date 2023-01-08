@@ -1,10 +1,11 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import PlayPause from "./PlayPause";
 import { playPause, setActiveSong } from "../redux/features/playerSlice";
 
-const SongCard = ({ song, activeSong, isPlaying, data, i }) => {
+const SongCard = ({ song, isPlaying, activeSong, data, i }) => {
   const dispatch = useDispatch();
 
   const handlePauseClick = () => {
@@ -27,20 +28,25 @@ const SongCard = ({ song, activeSong, isPlaying, data, i }) => {
           }`}
         >
           <PlayPause
-            song={song}
             isPlaying={isPlaying}
             activeSong={activeSong}
+            song={song}
             handlePause={handlePauseClick}
             handlePlay={handlePlayClick}
           />
         </div>
-        <img alt="song_img" src={song.images?.coverart} />
+        <img
+          alt="song_img"
+          src={song.images?.coverart}
+          className="w-full h-full rounded-lg"
+        />
       </div>
+
       <div className="mt-4 flex flex-col">
         <p className="font-semibold text-lg text-white truncate">
-          <Link to={`/song/${song?.key}`}>{song.title}</Link>
+          <Link to={`/songs/${song?.key}`}>{song.title}</Link>
         </p>
-        <p className="truncate mt-1 text-sm text-gray-300">
+        <p className="text-sm truncate text-gray-300 mt-1">
           <Link
             to={
               song.artists
